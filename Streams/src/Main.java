@@ -44,10 +44,11 @@ public class Main {
             System.out.println("Красных машин не найдено");
         }
 
+      ///////////СТУДЕНТЫ
 
+        // Список из 100 разных студентов с баллами
+        List<Student> students = generateStudentListWithPoints(100);
 
-        // Список из 100 разных студентов
-        List<Student> students = generateStudentList(100);
 
         // Фамилии всех студентов младше 16 лет
         List<String> surnamesUnder16 = students.stream()
@@ -60,7 +61,20 @@ public class Main {
 
         // Выводим результат
         System.out.println("Фамилии студентов младше 16 лет: " + surnamesUnder16);
+
+        // Находим средний бал всех студентов
+        double averagePoints = students.stream()
+                .mapToDouble(Student::getPoints)
+                .average()
+                .orElse(0.0);
+
+        // Выводим результат
+        System.out.println("Средний бал всех студентов: " + averagePoints);
     }
+
+
+    //СТАТИЧЕСКИЕ МЕТОДЫ
+
 
     // Генерация списка машин
     private static List<Car> generateCarList(int size) {
@@ -83,8 +97,8 @@ public class Main {
         return colors[random.nextInt(colors.length)];
     }
 
-    // Генерации списка студентов
-    private static List<Student> generateStudentList(int size) {
+    // Генерации списка студентов с баллами
+    private static List<Student> generateStudentListWithPoints(int size) {
         List<Student> students = new ArrayList<>();
         Random random = new Random();
 
@@ -92,7 +106,8 @@ public class Main {
             String fullName = FULL_NAMES[random.nextInt(FULL_NAMES.length)];
             int age = random.nextInt(40); // возраст от 0 до 40
             String group = "Group" + (i % 5); // группы от 0 до 4
-            students.add(new Student(fullName, age, group));
+            int points = random.nextInt(101); // случайные баллы от 0 до 100
+            students.add(new Student(fullName, age, group, points));
         }
 
         return students;
