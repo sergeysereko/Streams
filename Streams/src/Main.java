@@ -1,5 +1,6 @@
 import Task1.Car;
 import Task2.Student;
+import Task2.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Main {
         // Список из 100 разных машин
         List<Car> cars = generateCarList(100);
 
+        System.out.println("\n");
         // Выводим информацию только о красных машинах
         System.out.println("Информация о красных машинах:");
         cars.stream()
@@ -35,6 +37,7 @@ public class Main {
                 .max((car1, car2) -> Integer.compare(car1.getMaxSpeed(), car2.getMaxSpeed()))
                 .orElse(null);
 
+        System.out.println("\n");
         // Результаты
         if (fastestRedCar != null) {
             System.out.println("Самая быстрая красная машина: " + fastestRedCar.getName() +
@@ -59,6 +62,7 @@ public class Main {
                 })
                 .collect(Collectors.toList());
 
+        System.out.println("\n");
         // Выводим результат
         System.out.println("Фамилии студентов младше 16 лет: " + surnamesUnder16);
 
@@ -68,8 +72,24 @@ public class Main {
                 .average()
                 .orElse(0.0);
 
+
+        System.out.println("\n");
         // Выводим результат
         System.out.println("Средний бал всех студентов: " + averagePoints);
+
+
+        // Преобразование списка студентов в список работников
+        List<Employee> employees = students.stream()
+                .map(student -> new Employee(student.getSurname(), student.getName(), student.getPatronymic(), student.getAge()))
+                .collect(Collectors.toList());
+
+        System.out.println("\n");
+        // Вывод информации о работниках
+        System.out.println("Информация о работниках (преобразованных из студентов):");
+        employees.forEach(employee -> System.out.println("Имя: " + employee.getName() +
+                ", Фамилия: " + employee.getSurname() +
+                ", Отчество: " + employee.getPatronymic() +
+                ", Возраст: " + employee.getAge()));
     }
 
 

@@ -13,6 +13,23 @@ public class Student {
         this.points = points;
     }
 
+
+    // методы для получения отдельных частей полного имени
+    public String getSurname() {
+        String[] nameParts = fullName.split(" ");
+        return nameParts.length > 0 ? nameParts[0] : "";
+    }
+
+    public String getName() {
+        String[] nameParts = fullName.split(" ");
+        return nameParts.length > 1 ? nameParts[1] : "";
+    }
+
+    public String getPatronymic() {
+        String[] nameParts = fullName.split(" ");
+        return nameParts.length > 2 ? nameParts[2] : "";
+    }
+
     @Override
     public String toString() {
         return "Student{" +
